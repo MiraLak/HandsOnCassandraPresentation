@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>La marmite Cassandra</title>
+
+		<meta name="description" content="Hands On Cassandra avec les JDuchess">
+		<meta name="author" content="Amira LAKHAL">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- Présentation -->
+				<section>
+					<h1>Cassandra</h1>
+					<h3>Hand's On</h3>
+					<p>
+						<small>Présenté par 
+						<br/>Amira LAKHAL / <a href="http://twitter.com/miralak">@MiraLak</a>
+						<br/>Julien DUBOIS / <a href="http://twitter.com/juliendubois">@juliendubois</a>
+						<br/>Sylvain LEBRESNE /	<a href="http://twitter.com/pcmanus">@pcmanus</a></small>					
+					</p>
+				</section>
+
+				<!-- Historique -->
+				<section>
+					<section>
+					<h2>Historique</h2>
+					<ul><li class="fragment">Créateurs: Avinash Lakshman et Prashant Malik</li>					
+						<li class="fragment">Besoin: Faciliter la recherche des messages dans les boîtes de réception</li>
+						<li class="fragment">En Juillet 2008: Cassandra devient un projet public</li>
+						<li class="fragment">En Mars 2009: Projet Apache</li>
+						<li class="fragment">En 2010: Obtention de la licence Apache 2.0</li>	
+					</ul>
+					</section>
+					<section>
+						<h2>Historique</h2>
+						<ul>
+						<li class="fragment">En 2010: Facebook abondonne Cassandra pour HBase</li>
+						<li class="fragment">Aujourd’hui: Plusieurs utilisateurs de Cassandra: Twitter, Netflix, Reddit, Yakaz</li>
+						<li class="fragment">Datastax: Des documentations et services rattachés à Cassandra</li>						
+						</ul>						
+					</section>					
+				</section>
+				
+				<!-- Pourquoi Cassandra -->
+				<section>
+					<h2>Pourquoi Cassandra</h2>
+						<ul>
+						<li class="fragment">Scalabilité horizontale (Big Data)</li>
+						<li class="fragment">Disponibilité immédiate</li>						
+						<li class="fragment">Déploiement mutli-datacenter</li>						
+						</ul>
+				</section>
+				
+				<!-- Architecture -->
+				<section>
+					<section>
+						<h2>Architecture</h2>
+						<p><li>une base de donnée</li></p>
+						<a class="test" href="#/3/">
+							<img src="./lib/images/img1.png">
+						</a>
+					</section>
+					<section>
+						<h2>Architecture</h2>
+						<p><li>distribuée / décentralisée</li></p>
+						<a class="test" href="#/3/1">
+							<img src="./lib/images/img2.png">
+						</a>
+					</section>
+					<section>
+						<h2>Architecture</h2>
+						<p><li>réplication / durable</li></p>
+						<a class="test" href="#/3/2">
+							<img src="./lib/images/img3.png">
+						</a>
+					</section>
+					<section>
+						<h2>Architecture</h2>
+						<p><li>scalabe / élastique</li></p>
+						<a class="test" href="#/3/3">
+							<img id="img1" src="./lib/images/img4.png">
+						</a>
+					</section>
+					<section>
+						<h2>Architecture</h2>
+						<p><li>tolérante aux pannes / no SPOF</li></p>
+						<a class="test" href="#/3/4">
+							<img src="./lib/images/img6.png">
+						</a>
+					</section>					
+					<section>
+						<h2>Architecture</h2>
+						<p><li>support multi datacenter</li></p>
+						<a class="test" href="#/3/6">
+							<img src="./lib/images/img7.png">
+						</a>
+					</section>
+					
+				</section>
+				
+				<!-- Modèle de données -->
+				<section>
+					<section>
+						<h2>Modèle de données</h2>
+						<ul>						
+						    <li class="fragment">Une <span class="fragment highlight-blue">colonne</span> est un ensemble de clé, valeur et un timestamp,</li>
+						    <li class="fragment">Une <span class="fragment highlight-blue">row</span> est un ensemble de colonnes identifiés par une clé  de row,</li>
+						    <li class="fragment">Une <span class="fragment highlight-blue">column family</span> est un ensemble de row.</li>
+						    <li class="fragment">Le <span class="fragment highlight-blue">keyspace</span> contient l’ensemble des column family,</li>
+						    <li class="fragment">Le <span class="fragment highlight-blue">cluster</span> englobe les différents keyspace.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Réplication</h2>
+						<p>‘Replication Factor’ (RF): nombre de ‘replicas’ (copies)</p>
+					</section>					
+					<section>
+						<h2>Consistency Level</h2>
+						<ul>
+						<li  class="fragment roll-in">ONE</li>
+						<li  class="fragment roll-in">QUORUM</li>	
+						<li  class="fragment roll-in">ALL</li>							
+						</ul>
+					</section>					
+				</section>
+
+				<!--CQL -->
+				<section>
+					<section>
+						<h2>CQL</h2>
+						<ul>
+							<li class="fragment">Sous-ensemble de SQL + extensions (TTL, ConsistencyLevel, ...). </li>
+							<li class="fragment">Et quelques différences mineurs (INSERT et UPDATE sont des “UPSERT”)</li>
+							<li class="fragment">Pas de join ou de sous-requêtes: la dénormalisation est la norme.</li>
+							<li class="fragment">Pas de join ou de sous-requêtes: la dénormalisation est la norme.</li>
+							<li class="fragment">La modélisation est guidée par les requêtes.</li>
+							<li class="fragment">Dénormalisation pour co-localiser les données accédés ensembles.</li>
+							<li class="fragment">Notion d’ordre (sur disque).</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>CQL</h2>
+						<pre><code contenteditable>
+CREATE TABLE users (
+	user_id uuid PRIMARY KEY,
+	name text,
+	login text,
+	password text
+)
+INSERT INTO users (user_id, name, login, password)
+	VALUES (553-e2-465f, ‘Paul Martin’, ‘pmartin’, ‘1234’)
+
+// Atomique & Isolé
+UPDATE users SET login=‘paulm’ AND password=‘12E4’
+
+SELECT * FROM users;
+SELECT * FROM users WHERE user_id = 553-e2-465f;
+						
+						</code></pre>				
+					</section>
+				</section>
+
+				<!--Hector -->
+				<section>
+					<h2>Hector</h2>
+					<ul>
+						<li class="fragment">Client Java pour Cassandra</li>
+						<li class="fragment"><a class="test" href="https://github.com/hector-client/hector">https://github.com/hector-client/hector</a></li>
+</ul>
+				</section>
+
+				<!--<section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's a few styles of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment roll-in">roll-in</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-green">highlight-green</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>-->
+
+
+				<section>
+					<h1>Il est temps de coder</h1>
+					<h3>Des questions?</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
