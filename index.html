@@ -66,17 +66,7 @@
 						</ul>						
 					</section>					
 				</section>
-				
-				<!-- Pourquoi Cassandra -->
-				<section>
-					<h2>Pourquoi Cassandra</h2>
-						<ul>
-						<li class="fragment">Scalabilité horizontale (Big Data)</li>
-						<li class="fragment">Disponibilité immédiate</li>						
-						<li class="fragment">Déploiement mutli-datacenter</li>						
-						</ul>
-				</section>
-				
+								
 				<!-- Architecture -->
 				<section>
 					<section>
@@ -123,6 +113,16 @@
 					</section>
 					
 				</section>
+								
+				<!-- Pourquoi Cassandra -->
+				<section>
+					<h2>Pourquoi Cassandra</h2>
+						<ul>
+						<li class="fragment">Scalabilité horizontale (Big Data)</li>
+						<li class="fragment">Disponibilité immédiate</li>						
+						<li class="fragment">Déploiement mutli-datacenter</li>						
+						</ul>
+				</section>
 				
 				<!-- Modèle de données -->
 				<section>
@@ -150,42 +150,7 @@
 					</section>					
 				</section>
 
-				<!--CQL -->
-				<section>
-					<section>
-						<h2>CQL</h2>
-						<ul>
-							<li class="fragment">Sous-ensemble de SQL + extensions (TTL, ConsistencyLevel, ...). </li>
-							<li class="fragment">Et quelques différences mineurs (INSERT et UPDATE sont des “UPSERT”)</li>
-							<li class="fragment">Pas de join ou de sous-requêtes: la dénormalisation est la norme.</li>
-							<li class="fragment">La modélisation est guidée par les requêtes.</li>
-							<li class="fragment">Dénormalisation pour co-localiser les données accédés ensembles.</li>
-							<li class="fragment">Notion d’ordre (sur disque).</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>CQL</h2>
-						<pre><code contenteditable>
-CREATE TABLE users (
-	user_id uuid PRIMARY KEY,
-	name text,
-	login text,
-	password text
-)
-INSERT INTO users (user_id, name, login, password)
-	VALUES (553-e2-465f, ‘Paul Martin’, ‘pmartin’, ‘1234’)
-
-// Atomique & Isolé
-UPDATE users SET login=‘paulm’ AND password=‘12E4’
-
-SELECT * FROM users;
-SELECT * FROM users WHERE user_id = 553-e2-465f;
-						
-						</code></pre>				
-					</section>
-				</section>
-
+				
 				<!--Hector -->
 				<section>
 					<h2>Hector</h2>
